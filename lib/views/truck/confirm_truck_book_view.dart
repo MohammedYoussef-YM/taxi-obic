@@ -5,24 +5,31 @@ class ConfirmTruckBookView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Truck truck = ModalRoute.of(context)!.settings.arguments as Truck;
+
     return ChangeNotifierProvider(
-      create: (_) => ConfirmTruckBookViewModel(),
+      create: (_) => ConfirmTruckBookViewModel(context.read<ApiService>(),context.read<SharedPreferencesService>())..gettruckData(truck),
       child: Scaffold(
         body: Consumer<ConfirmTruckBookViewModel>(
             builder: (context, controllers, child) {
           return Stack(
             children: <Widget>[
               GoogleMap(
-                mapType: MapType.hybrid,
+                mapType: MapType.normal,
                 initialCameraPosition: controllers.kGooglePlex,
                 onMapCreated: (GoogleMapController controller) {
                   controllers.controllerMap.complete(controller);
                 },
-                onTap: (LatLng position) {
-                  controllers.updateLocation(position);
+                onCameraMove: (CameraPosition position) {
+                  controllers.updateLocationFromMap(position);
                 },
+                polylines: controllers.polylines,
               ),
+
               appBarWithInfo(context,"Truck delivery address","5th Street,26","Truck car #26"),
+              const Center(
+                child: Icon(Icons.location_on, size: 40, color: Colors.red),
+              ),
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -61,7 +68,7 @@ class ConfirmTruckBookView extends StatelessWidget {
                         const SizedBox(height: 10),
                         if (controllers.startingPointController.text.isNotEmpty &&
                             controllers.arrivalPointController.text.isNotEmpty)
-                          CustomRow(name: 'cost: ', title: controllers.cost, mainAxisAlignment: MainAxisAlignment.start, fontSize: 22,),
+                          CustomRow(name: 'cost: ', title: '${controllers.cost}', mainAxisAlignment: MainAxisAlignment.start, fontSize: 22,),
                          ButtonBook(
                             title: 'Confirm Book',
                             onPressed: () {

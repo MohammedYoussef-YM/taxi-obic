@@ -1,5 +1,6 @@
-import 'package:taxi_obic/utils/import.dart';
 import 'dart:ui';
+
+import 'package:taxi_obic/utils/import.dart';
 
 class TruckDriverDetailsView extends StatelessWidget {
   const TruckDriverDetailsView({super.key});
@@ -18,7 +19,7 @@ class TruckDriverDetailsView extends StatelessWidget {
               GoogleMap(
                 mapType: MapType.normal,
                 initialCameraPosition: CameraPosition(
-                  target: LatLng(truck.latitude, truck.longitude),
+                  target: LatLng(truck.latitude!, truck.longitude!),
                   // Default location
                   zoom: 14.4746,
                 ),
@@ -50,7 +51,7 @@ class TruckDriverDetailsView extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.fromLTRB(71.5, 0, 0, 2),
                           child: Text(
-                            truck.driverName,
+                            truck.driverName!,
                             style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 25,
@@ -161,7 +162,7 @@ class TruckDriverDetailsView extends StatelessWidget {
                         ButtonBook(
                           title: 'Book',
                           onPressed: () {
-                            viewModel.goToConfirmTruckBook(context);
+                            viewModel.goToConfirmTruckBook(context,truck);
                           }, isDone: false,
                         ),
                       ],

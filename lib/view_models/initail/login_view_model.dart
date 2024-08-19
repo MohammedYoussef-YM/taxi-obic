@@ -2,8 +2,9 @@ import 'package:taxi_obic/utils/import.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final ApiService _apiService;
-  final SharedPreferencesService _prefsService;
   TextEditingController phoneController = TextEditingController();
+  final SharedPreferencesService _prefsService;
+  GlobalKey<FormState> formState = GlobalKey<FormState>();
   String? accessToken;
 
   LoginViewModel(this._apiService, this._prefsService);
@@ -11,7 +12,8 @@ class LoginViewModel extends ChangeNotifier {
   Future<void> login(context) async {
     try {
       accessToken = await _apiService.login(phoneController.text);
-      if (accessToken!.isEmpty){
+      print(accessToken);
+      if (accessToken!.isNotEmpty){
         // حفظ حالة تسجيل الدخول
         await _prefsService.setLoggedIn(true);
         // التنقل إلى الشاشة الرئيسية

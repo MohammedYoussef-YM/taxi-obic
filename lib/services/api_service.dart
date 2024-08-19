@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:taxi_obic/models/truck.dart';
 import 'package:taxi_obic/services/shared_preferences_service.dart';
 
 import '../models/price.dart';
@@ -44,6 +45,29 @@ class ApiService {
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);
         return data.map((taxi) => Taxi.fromJson(taxi)).toList(); // Assuming Taxi has a fromJson method
+      } else {
+        throw Exception('Failed to load taxis');
+      }
+    } catch (e) {
+      print('Error fetching taxis: $e');
+      return []; // Return an empty list on error
+    }
+  }
+  Future<List<Truck>> fetchNearestTruck(double latitude, double longitude, double radius, String token) async {
+    print('-------f-f-f');
+    final String url = 'http://192.168.0.129:5004/api/trucks/find_nearest_trucks/?lat=$latitude&long=$longitude&radius=$radius';
+
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $token', // Add the token here
+        },
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = json.decode(response.body);
+        return data.map((truck) => Truck.fromJson(truck)).toList(); // Assuming Taxi has a fromJson method
       } else {
         throw Exception('Failed to load taxis');
       }
@@ -137,6 +161,50 @@ class ApiService {
     }
   }
 
+  Future<int> bookTruck({
+    required double startLat,
+    required double startLong,
+    required double endLat,
+    required double endLong,
+    required String token,
+    required String truckId,
+  }) async {
+    try {
+      final url = Uri.parse('$_baseUrl/api/trucks/book_truck/');
+      var body = {
+        "truck_id": truckId,
+        "current_lat": startLat.toString(),
+        "current_long": startLong.toString(),
+        "dest_lat": endLat.toString(),
+        "dest_long": endLong.toString(),
+      };
+      final response = await http.post(
+        url,
+        body: body,
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      print('response.statusCode');
+      print(response.statusCode);
+      print(response.statusCode.runtimeType);
+      print('response.statusCode');
+
+      if (response.statusCode == 200) {
+        return 200;
+        // Booking successful, proceed to the next step
+      } else {
+        // Handle error (e.g., show a message to the user)
+        return 0;
+      }
+    } catch (e) {
+      // Handle the exception
+      print('e');
+      print(e);
+      print('e');
+      return 0;
+      print('Error booking taxi: $e');
+    }
+  }
 
 
 }

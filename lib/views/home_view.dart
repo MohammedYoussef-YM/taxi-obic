@@ -21,12 +21,6 @@ class HomeView extends StatelessWidget {
                       target: LatLng(15.371921, 44.195652), // Default location
                       zoom: 14.4746,
                     ),
-                    onMapCreated: (GoogleMapController controller) {
-                      viewModel.mapController.complete(controller);
-                      viewModel.controller = controller;
-                      viewModel.getCurrentLocation(context);
-                    },
-                    markers: viewModel.taxiMarkers, // Display taxi markers
                   ),
                 ),
                 appBarSimple(context,"Taxi delivery address"),

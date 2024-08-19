@@ -103,11 +103,11 @@ class HomeViewModel extends ChangeNotifier {
 
   void goToTaxiRent(context, taxi) {
     // Update the driverPoint and taxi in DriverDetailsViewMode// Use the correct method name
-    Navigator.pushNamed(context, '/taxi',arguments: taxi);
+    Navigator.pushNamed(context, '/taxiDriverDetails',arguments: taxi);
   }
   void goToTruckRent(context, truck) {
     // Update the driverPoint and taxi in DriverDetailsViewMode// Use the correct method name
-    Navigator.pushNamed(context, '/truck',arguments: truck);
+    Navigator.pushNamed(context, '/truckDriverDetails',arguments: truck);
   }
 
   void showErrorDialog(BuildContext context, String message) {

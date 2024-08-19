@@ -1,15 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxi_obic/utils/import.dart';
+import 'package:taxi_obic/utils/validinput.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await determinePosition(); // Ensure this function is defined in geolocator_service.dart
-  // إنشاء SharedPreferences instance
+  await determinePosition();
   final prefs = await SharedPreferences.getInstance();
   final SharedPreferencesService sharedPreferencesService = SharedPreferencesService();
 
-  // تحقق من حالة الـ OnBoarding وحالة تسجيل الدخول
   final bool onBoardingSeen = prefs.getBool('onBoardingSeen') ?? false;
   final bool isLoggedIn = await sharedPreferencesService.isLoggedIn();
 
@@ -31,6 +30,7 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider(create: (_) => SharedPreferencesService()),
         Provider(create: (context) => ApiService(context.read<SharedPreferencesService>())),
+        ChangeNotifierProvider(create: (_) => ValidationProvider()),
         ChangeNotifierProvider<OnBoardingViewModel>(create: (context) => OnBoardingViewModel(context.read<SharedPreferencesService>())),
         ChangeNotifierProvider(create: (context) => LoginViewModel(context.read<ApiService>(), context.read<SharedPreferencesService>())),
         ChangeNotifierProvider(create: (_) => TaxiDriverDetailsViewModel()),
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Taxi',
-        initialRoute: isLoggedIn ? AppRoute.home : (onBoardingSeen ? AppRoute.login : AppRoute.onBoarding),
+        initialRoute: isLoggedIn ? AppRoute.login : (onBoardingSeen ? AppRoute.login : AppRoute.onBoarding),
         routes: appRoutes,
         theme: ThemeData(
           primarySwatch: Colors.blue,

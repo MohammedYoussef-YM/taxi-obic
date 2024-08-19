@@ -6,7 +6,7 @@ class DoneBookView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => DoneBookViewModel(),
+      create: (_) => DoneBookViewModel()..checkArguments(context),
       child: Builder(builder: (context) {
         // هنا يتم التأكد من استدعاء checkArguments بعد إنشاء DoneBookViewModel
         Future.microtask(() {
@@ -22,7 +22,7 @@ class DoneBookView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        AppBarDoneBook(type: controllers.type),
+                        AppBarDoneBook(type: controllers.type,driverName:controllers.driverName ,),
                         const Line(height: 4),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -64,8 +64,9 @@ class DoneBookView extends StatelessWidget {
 
 class AppBarDoneBook extends StatelessWidget {
   final String? type;
+  final String? driverName;
   const AppBarDoneBook({
-    super.key, this.type,
+    super.key, this.type, this.driverName,
   });
 
   @override
@@ -88,7 +89,7 @@ class AppBarDoneBook extends StatelessWidget {
                       children: [
                         Text(type!,style: const TextStyle(color: Colors.grey),),
                         const Line(height: 1),
-                        const Text("Ahmad Noaman"),
+                         Text("${driverName}"),
                       ],),
                   )
                 ]),

@@ -23,7 +23,6 @@ class ConfirmTaxiBookView extends StatelessWidget {
                   onCameraMove: (CameraPosition position) {
                     controllers.updateLocationFromMap(position);
                   },
-                  polylines: controllers.polylines,
                 ),
                 // Fixed marker at the center of the screen
                 const Center(

@@ -11,24 +11,29 @@ class TruckDriverDetailsViewModel extends ChangeNotifier {
     zoom: 14.4746,
   );
 
-  void goToConfirmTruckBook(context) {
-    Navigator.pushReplacementNamed(context, '/confirmTruckBook');
+  void goToConfirmTruckBook(context,truck) {
+    Navigator.pushReplacementNamed(context, '/confirmTruckBook',arguments: truck);
   }
 
-  void specificMarkers(BuildContext context,truck) async {
+  void specificMarkers(context,truck) async {
 
     truckMarkers.clear();
 
     // Load custom icons
     final availableIcon = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(size: Size(18, 18)),
-      'assets/images/taxi_marker.png',
+      'assets/images/truck_c.png',
     );
 
     final unavailableIcon = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration(size: Size(18, 18)),
-      'assets/images/taxi_marker_unavailable.png', // Use a different icon for unavailable taxis
+      'assets/images/truck_c.png', // Use a different icon for unavailable taxis
     );
+
+    print('truck');
+    print(truck.id);
+    print(truck.latitude);
+    print('truck');
 
     truckMarkers.add(
       Marker(
