@@ -2,8 +2,9 @@ import 'package:taxi_obic/utils/import.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final ApiService _apiService;
-  final SharedPreferencesService _prefsService;
   TextEditingController phoneController = TextEditingController();
+  final SharedPreferencesService _prefsService;
+  GlobalKey<FormState> formState = GlobalKey<FormState>();
   String? accessToken;
 
   LoginViewModel(this._apiService, this._prefsService);

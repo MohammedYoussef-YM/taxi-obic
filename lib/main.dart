@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxi_obic/utils/import.dart';
+import 'package:taxi_obic/utils/validinput.dart';
 
 
 void main() async {
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider(create: (_) => SharedPreferencesService()),
         Provider(create: (context) => ApiService(context.read<SharedPreferencesService>())),
+        ChangeNotifierProvider(create: (_) => ValidationProvider()),
         ChangeNotifierProvider<OnBoardingViewModel>(create: (context) => OnBoardingViewModel(context.read<SharedPreferencesService>())),
         ChangeNotifierProvider(create: (context) => LoginViewModel(context.read<ApiService>(), context.read<SharedPreferencesService>())),
         ChangeNotifierProvider(create: (_) => TaxiDriverDetailsViewModel()),
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Taxi',
-        initialRoute: isLoggedIn ? AppRoute.home : (onBoardingSeen ? AppRoute.login : AppRoute.onBoarding),
+        initialRoute: isLoggedIn ? AppRoute.login : (onBoardingSeen ? AppRoute.login : AppRoute.onBoarding),
         routes: appRoutes,
         theme: ThemeData(
           primarySwatch: Colors.blue,
