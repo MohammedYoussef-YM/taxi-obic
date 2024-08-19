@@ -19,7 +19,7 @@ class ChooseRegistrationScreen extends StatelessWidget {
               color: Color(0xE3000000)
             ),
             child: ChangeNotifierProvider(
-              create: (_) => OnBoardingViewModel(),
+              create: (context) => OnBoardingViewModel(context.read<SharedPreferencesService>()),
               child: Column(
                 children: [
                   Expanded(

@@ -61,18 +61,18 @@ class LoginScreen extends StatelessWidget {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: IntlPhoneField(
-                                dropdownIcon: const Icon(Icons.arrow_drop_down,
-                                    color: AppColor.white),
+                                dropdownIcon: const Icon(Icons.arrow_drop_down, color: AppColor.white),
                                 style: const TextStyle(color: AppColor.white),
-                                dropdownTextStyle:
-                                    const TextStyle(color: AppColor.white),
+                                dropdownTextStyle: const TextStyle(color: AppColor.white),
                                 controller: controller.phoneController,
                                 keyboardType: TextInputType.phone,
                                 validator: (val) {
+                                  return null;
+
 // return validInput(val!.toString(), 7, 15, "phone");
                                 },
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.symmetric(
+                                decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
                                       vertical: 1, horizontal: 20),
                                 ),
                                 languageCode: "en",

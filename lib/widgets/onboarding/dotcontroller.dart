@@ -24,12 +24,6 @@ class CustomDotControllerOnBoarding extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
-            controller.currentPage == 2 ?
-            TextButton(onPressed: (){
-              // viewModel.goToTaxiRent(context, viewModel);
-              Navigator.pushNamed(context, '/chooseRegistration');
-            },child: const Text("Ok",style: TextStyle(color: AppColor.white),),):const Center()
           ],
         );
       },
