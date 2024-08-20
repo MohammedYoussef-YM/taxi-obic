@@ -7,7 +7,7 @@ import '../models/price.dart';
 import '../models/taxi.dart';
 
 class ApiService {
-  final String _baseUrl = 'http://192.168.1.104:8099';
+  final String _baseUrl = 'http://192.168.1.104:5004';
   final SharedPreferencesService _prefsService;
 
   ApiService(this._prefsService);
@@ -32,7 +32,7 @@ class ApiService {
   }
 
   Future<List<Taxi>> fetchNearestTaxis(double latitude, double longitude, double radius, String token) async {
-    final String url = 'http://192.168.0.129:5004/api/taxis/find_nearest_taxis/?lat=$latitude&long=$longitude&radius=$radius';
+    final String url = '$_baseUrl/api/taxis/find_nearest_taxis/?lat=$latitude&long=$longitude&radius=$radius';
 
     try {
       final response = await http.get(
@@ -55,7 +55,7 @@ class ApiService {
   }
   Future<List<Truck>> fetchNearestTruck(double latitude, double longitude, double radius, String token) async {
     print('-------f-f-f');
-    final String url = 'http://192.168.0.129:5004/api/trucks/find_nearest_trucks/?lat=$latitude&long=$longitude&radius=$radius';
+    final String url = '$_baseUrl/api/trucks/find_nearest_trucks/?lat=$latitude&long=$longitude&radius=$radius';
 
     try {
       final response = await http.get(
@@ -93,7 +93,7 @@ class ApiService {
     required int taxiId,
   }) async {
     final url = Uri.parse(
-      'http://192.168.0.129:5004/api/bookings/calculate_price/'
+      '$_baseUrl/api/bookings/calculate_price/'
           '?start_lat=$startLat&start_long=$startLong&end_lat=$endLat&end_long=$endLong&taxi_id=$taxiId',
     );
 

@@ -10,7 +10,7 @@ Widget appBarSimple(context,title) {
         color: Color(0xFF252424),
       ),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(30, 30, 30, 10),
+        padding: const EdgeInsets.fromLTRB(30, 40, 30, 10),
         child: Row(
           children: [
             Container(
@@ -19,7 +19,7 @@ Widget appBarSimple(context,title) {
                     borderRadius: BorderRadius.circular(22)
                 ),
                 child: InkWell(onTap: (){Navigator.pop(context);},child: const Icon(Icons.arrow_circle_left_outlined,color: Colors.black))),
-            const SizedBox(width: 8),
+            const SizedBox(width: 12),
             Text(title,style: const TextStyle(color: Colors.white),)
           ],
         ),

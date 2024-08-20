@@ -78,23 +78,25 @@ class HomeViewModel extends ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
-            'Driver: ${taxi.driverName}\nType: ${taxi.type}',
-            style: TextStyle(fontSize: 14),
-            textAlign: TextAlign.center,
+          title: Column(
+            children: [
+              Text(
+                'Driver: ${taxi.driverName}\nType: ${taxi.type}',
+                style: const TextStyle(fontSize: 14),
+                textAlign: TextAlign.start,
+              ),
+            ],
           ),
           content: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffF3A205),
-              textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
+              backgroundColor: const Color(0xffF3A205),
             ),
             onPressed: () {
               goToTaxiRent(context, taxi);
             },
-            child: const Text('Book'),
+            child:  const Text('Book',style:  TextStyle(
+                color: Colors.black,
+                fontSize: 18)),
           ),
         );
       },
