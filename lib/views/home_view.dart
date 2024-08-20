@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
             body: Stack(
               children: <Widget>[
                 buildShowMap(),
-                appBarSimple(context,"Taxi delivery address"),
+                appBarSimple(context,"Taxi delivery address",true),
                 Positioned(
                   bottom: 0,
                   left: 0,

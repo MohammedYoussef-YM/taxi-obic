@@ -1,7 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taxi_obic/utils/import.dart';
-import 'package:taxi_obic/utils/validinput.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,7 +37,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Taxi',
-        initialRoute: isLoggedIn ? AppRoute.home : (onBoardingSeen ? AppRoute.login : AppRoute.onBoarding),
+        initialRoute: isLoggedIn ? AppRoute.login : (onBoardingSeen ? AppRoute.login : AppRoute.onBoarding),
         routes: appRoutes,
         theme: ThemeData(
           primarySwatch: Colors.blue,

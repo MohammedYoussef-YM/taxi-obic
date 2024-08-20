@@ -10,7 +10,7 @@ class DriverImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       left: 25,
-      bottom: 228,
+      bottom: MediaQuery.of(context).size.height * .33,
       child: SizedBox(
         width: 67,
         height: 66,

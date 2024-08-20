@@ -8,7 +8,7 @@ class TruckViewModel extends ChangeNotifier {
   final Completer<GoogleMapController> mapController = Completer();
   GoogleMapController? controller;
   List<Truck> trucks = [];
-  Set<Marker> truckMarkers = {};
+  Set<Marker> markers = {};
 
   TruckViewModel(this._apiService, this._sharedPreferencesService);
 
@@ -49,21 +49,21 @@ class TruckViewModel extends ChangeNotifier {
   }
 
   void updateTruckMarkers(BuildContext context) async {
-    truckMarkers.clear();
+    markers.clear();
 
     // Load custom icons
     final availableIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(size: Size(18, 18)),
+      const ImageConfiguration(size: Size(18, 18)),
       'assets/images/truck_c.png',
     );
 
     final unavailableIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(size: Size(18, 18)),
+      const ImageConfiguration(size: Size(18, 18)),
       'assets/images/truck_c.png', // Ensure you have a different icon for unavailable taxis
     );
 
     for (var truck in trucks) {
-      truckMarkers.add(
+      markers.add(
         Marker(
           markerId: MarkerId('${truck.id}'),
           position: LatLng(truck.latitude!, truck.longitude!),
@@ -81,21 +81,22 @@ class TruckViewModel extends ChangeNotifier {
         return AlertDialog(
           title: Text(
             'Driver: ${truck.driverName}\nType: ${truck.type}',
-            style: TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 14),
             textAlign: TextAlign.center,
           ),
           content: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xffF3A205),
-              textStyle: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
+              backgroundColor: const Color(0xffF3A205),
             ),
             onPressed: () {
               goToTruckRent(context, truck);
+              Navigator.pop(context);
             },
-            child: const Text('Book'),
+            child: const Text('Book',style: TextStyle(
+                color: AppColor.blackButton,
+                fontWeight: FontWeight.bold,
+                fontSize: 16
+            ),),
           ),
         );
       },
@@ -116,12 +117,12 @@ class TruckViewModel extends ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Error'),
+          title: const Text('Error'),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

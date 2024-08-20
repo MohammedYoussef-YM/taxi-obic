@@ -1,6 +1,6 @@
 import 'package:taxi_obic/utils/import.dart';
 
-Widget appBarSimple(context,title) {
+Widget appBarSimple(context,title,isHome) {
   return Positioned(
     top: 0,
     left: 0,
@@ -13,6 +13,7 @@ Widget appBarSimple(context,title) {
         padding: const EdgeInsets.fromLTRB(30, 40, 30, 10),
         child: Row(
           children: [
+            isHome?const SizedBox(width: 10):
             Container(
                 decoration: BoxDecoration(
                     color: AppColor.primaryColor,

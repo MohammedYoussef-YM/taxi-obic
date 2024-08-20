@@ -52,12 +52,12 @@ class HomeViewModel extends ChangeNotifier {
 
     // Load custom icons
     final availableIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(size: Size(18, 18)),
+      const ImageConfiguration(size: Size(18, 18)),
       'assets/images/taxi_marker.png',
     );
 
     final unavailableIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(size: Size(18, 18)),
+      const ImageConfiguration(size: Size(18, 18)),
       'assets/images/taxi_marker_unavailable.png', // Ensure you have a different icon for unavailable taxis
     );
 
@@ -107,6 +107,7 @@ class HomeViewModel extends ChangeNotifier {
     // Update the driverPoint and taxi in DriverDetailsViewMode// Use the correct method name
     Navigator.pushNamed(context, '/taxiDriverDetails',arguments: taxi);
   }
+
   void goToTruckRent(context, truck) {
     // Update the driverPoint and taxi in DriverDetailsViewMode// Use the correct method name
     Navigator.pushNamed(context, '/truckDriverDetails',arguments: truck);
@@ -117,12 +118,12 @@ class HomeViewModel extends ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Error'),
+          title: const Text('Error'),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

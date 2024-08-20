@@ -56,3 +56,6 @@ export 'package:taxi_obic/widgets/map/ShowDetailsMap.dart';
 export 'package:taxi_obic/widgets/map/ShowMap.dart';
 export 'package:taxi_obic/widgets/map/information_driver.dart';
 export 'package:taxi_obic/widgets/map/driver_image.dart';
+export 'package:taxi_obic/widgets/map/show_confirm_map.dart';
+export 'package:taxi_obic/widgets/map/bottom_sheet_confirm_book.dart';
+export 'package:shared_preferences/shared_preferences.dart';

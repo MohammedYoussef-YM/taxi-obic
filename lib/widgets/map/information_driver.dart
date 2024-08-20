@@ -33,12 +33,12 @@ class InformationDriver extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                margin: const EdgeInsets.fromLTRB(71.5, 0, 0, 2),
+                margin: const EdgeInsets.fromLTRB(65.5, 0, 0, 2),
                 child: Text(
                   taxi.driverName,
                   style: const TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 25,
+                    fontSize: 22,
                     color: Color(0xFFE6E5E3),
                   ),
                 ),

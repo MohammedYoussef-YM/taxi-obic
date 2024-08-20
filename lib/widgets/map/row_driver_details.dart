@@ -20,22 +20,28 @@ class RowDriverDetails extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 9, 0),
             child: SizedBox(
-              width: 65,
+              width: 75,
               child: Text(
                 title,
                 style: const TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 15,
+                  fontSize: 14,
                   color: Color(0xFFE6E5E3),
                 ),
               ),
             ),
           ),
-          Text(details,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
-              color: Color(0xFFE6E5E3),
+          // Wrap the details Text in a Flexible widget
+          Flexible(
+            child: Text(details,
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+                color: Color(0xFFE6E5E3),
+              ),
+              overflow: TextOverflow.ellipsis,  // This will truncate the text if it overflows
+              maxLines: 1,  // Optionally, limit the text to a single line
+              softWrap: false,
             ),
           ),
         ],
