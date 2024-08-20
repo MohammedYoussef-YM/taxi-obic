@@ -1,3 +1,4 @@
+import 'package:lottie/lottie.dart';
 import 'package:taxi_obic/utils/import.dart';
 
 class DoneBookView extends StatelessWidget {
@@ -47,7 +48,8 @@ class DoneBookView extends StatelessWidget {
                             CustomColumnForDoneBook(title: viewModel.arrivalPoint, icon: Icons.flag),
                             const CustomColumnForDoneBook(title: "It takes 18 minutes to reach you.", icon: Icons.access_time),
                             const CustomColumnForDoneBook(title: "Please wait at the arrival point", icon: Icons.accessibility),
-                            Center(child: Image.asset(AppImageAsset.taxiRound,width: MediaQuery.of(context).size.height * .34)),
+                            // Center(child: Image.asset(AppImageAsset.taxiRound,width: MediaQuery.of(context).size.height * .34)),
+                            Center(child: Lottie.asset(AppImageAsset.loading)),
                             Center(
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width * .65,
