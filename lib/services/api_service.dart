@@ -7,7 +7,7 @@ import '../models/price.dart';
 import '../models/taxi.dart';
 
 class ApiService {
-  final String _baseUrl = 'http://192.168.0.129:5004';
+  final String _baseUrl = 'http://192.168.1.104:8099';
   final SharedPreferencesService _prefsService;
 
   ApiService(this._prefsService);

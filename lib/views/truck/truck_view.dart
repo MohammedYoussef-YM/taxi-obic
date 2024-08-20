@@ -12,7 +12,23 @@ class TruckView extends StatelessWidget {
             builder: (context, viewModel, child){
               return Stack(
                 children: <Widget>[
-                  buildShowMap(viewModel, context),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 66),
+                    child: GoogleMap(
+                      myLocationEnabled: true,
+                      trafficEnabled: true,
+                      initialCameraPosition: const CameraPosition(
+                        target: LatLng(15.371921, 44.195652), // Default location
+                        zoom: 14.4746,
+                      ),
+                      onMapCreated: (GoogleMapController controller) {
+                        viewModel.mapController.complete(controller);
+                        viewModel.controller = controller;
+                        viewModel.getCurrentLocation(context);
+                      },
+                      markers: viewModel.truckMarkers, // Display taxi markers
+                    ),
+                  ),
                   appBarSimple(context,"Back"),
                   Positioned(
                     bottom: 0,
@@ -39,25 +55,5 @@ class TruckView extends StatelessWidget {
         ),
       )
     );
-  }
-
-  Padding buildShowMap(TruckViewModel viewModel, BuildContext context) {
-    return Padding(
-                  padding: const EdgeInsets.only(top: 66),
-                  child: GoogleMap(
-                    myLocationEnabled: true,
-                    trafficEnabled: true,
-                    initialCameraPosition: const CameraPosition(
-                      target: LatLng(15.371921, 44.195652), // Default location
-                      zoom: 14.4746,
-                    ),
-                    onMapCreated: (GoogleMapController controller) {
-                      viewModel.mapController.complete(controller);
-                      viewModel.controller = controller;
-                      viewModel.getCurrentLocation(context);
-                    },
-                    markers: viewModel.truckMarkers, // Display taxi markers
-                  ),
-                );
   }
 }

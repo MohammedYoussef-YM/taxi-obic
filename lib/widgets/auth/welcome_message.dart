@@ -13,13 +13,13 @@ class WelcomeMessage extends StatelessWidget {
         Text(
           "Welcome to ",
           style: TextStyle(
-              fontSize: 34,
+              fontSize: 30,
               color: AppColor.primaryColor,
               fontWeight: FontWeight.bold),
         ),
         Text("Obic taxi",
             style: TextStyle(
-                fontSize: 34,
+                fontSize: 30,
                 color: AppColor.white,
                 fontWeight: FontWeight.bold)),
       ],
