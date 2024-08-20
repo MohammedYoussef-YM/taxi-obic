@@ -1,40 +1,52 @@
 class Truck {
-  final int id;
-  final String name;
-  final String color;
-  final int capacity;
-  final String type;
-  final String model;
-  final String driverName;
-  final double latitude;
-  final double longitude;
-  final bool available;
+  int? id;
+  String? name;
+  String? color;
+  int? capacity;
+  String? type;
+  String? model;
+  String? driverName;
+  double? latitude;
+  double? longitude;
+  bool? available;
 
-  Truck({
-    required this.id,
-    required this.name,
-    required this.color,
-    required this.capacity,
-    required this.type,
-    required this.model,
-    required this.driverName,
-    required this.latitude,
-    required this.longitude,
-    required this.available,
-  });
+  Truck(
+      {this.id,
+        this.name,
+        this.color,
+        this.capacity,
+        this.type,
+        this.model,
+        this.driverName,
+        this.latitude,
+        this.longitude,
+        this.available});
 
-  factory Truck.fromJson(Map<String, dynamic> json) {
-    return Truck(
-      id: json['id'],
-      name: json['name'],
-      color: json['color'],
-      capacity: json['capacity'],
-      type: json['type'],
-      model: json['model'],
-      driverName: json['driver_name'],
-      latitude: json['latitude'],
-      longitude: json['longitude'],
-      available: json['available'],
-    );
+  Truck.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    color = json['color'];
+    capacity = json['capacity'];
+    type = json['type'];
+    model = json['model'];
+    driverName = json['driver_name'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+    available = json['available'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['color'] = this.color;
+    data['capacity'] = this.capacity;
+    data['type'] = this.type;
+    data['model'] = this.model;
+    data['driver_name'] = this.driverName;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
+    data['available'] = this.available;
+    return data;
   }
 }

@@ -5,12 +5,10 @@ import 'package:taxi_obic/utils/validinput.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await determinePosition(); // Ensure this function is defined in geolocator_service.dart
-  // إنشاء SharedPreferences instance
+  await determinePosition();
   final prefs = await SharedPreferences.getInstance();
   final SharedPreferencesService sharedPreferencesService = SharedPreferencesService();
 
-  // تحقق من حالة الـ OnBoarding وحالة تسجيل الدخول
   final bool onBoardingSeen = prefs.getBool('onBoardingSeen') ?? false;
   final bool isLoggedIn = await sharedPreferencesService.isLoggedIn();
 

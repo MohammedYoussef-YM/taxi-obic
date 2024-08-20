@@ -24,7 +24,6 @@ class ConfirmTaxiBookViewModel extends ChangeNotifier {
   LatLng? startingPointLatLng;
   LatLng? arrivalPointLatLng;
 
-  Set<Polyline> polylines = {};  // Store the polyline
 
   void getTaxiData(Taxi theTaxi) {
     taxi = theTaxi;
@@ -54,7 +53,6 @@ class ConfirmTaxiBookViewModel extends ChangeNotifier {
         arrivalPointController.text = street;
         arrivalPointLatLng = position.target;
       }
-      await _drawRoute();
       if (startingPointLatLng != null && arrivalPointLatLng != null) {
         await calculate(
           startingPointLatLng!.latitude,
@@ -72,89 +70,7 @@ class ConfirmTaxiBookViewModel extends ChangeNotifier {
 
     notifyListeners();
   }
-  Future<void> _drawRoute() async {
-    if (startingPointLatLng != null && arrivalPointLatLng != null) {
-      final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/directions/json'
-            '?origin=${startingPointLatLng!.latitude},${startingPointLatLng!.longitude}'
-            '&destination=${arrivalPointLatLng!.latitude},${arrivalPointLatLng!.longitude}'
-            '&key=AIzaSyCaCSJ0BZItSyXqBv8vpD1N4WBffJeKhLQ',  // Replace YOUR_API_KEY with your actual API key
-      );
 
-      try {
-        final response = await http.get(url);
-        print('Response status: ${response.statusCode}');
-        print('Response body: ${response.body}');
-
-        final data = json.decode(response.body);
-        print('Decoded data: $data');
-
-        if (data['status'] == 'OK') {
-          final routes = data['routes'] as List;
-          if (routes.isNotEmpty) {
-            final polyline = routes[0]['overview_polyline']['points'];
-            final decodedPoints = _decodePolyline(polyline);
-
-            polylines.clear();
-            final routePolyline = Polyline(
-              polylineId: PolylineId("route"),
-              points: decodedPoints,
-              color: Colors.blue,
-              width: 5,
-            );
-            polylines.add(routePolyline);
-
-            notifyListeners();
-          } else {
-            print('No routes found');
-          }
-        } else {
-          print('API Error: ${data['status']}');
-          if (data['error_message'] != null) {
-            print('Error message: ${data['error_message']}');
-          }
-        }
-      } catch (e) {
-        print('Error fetching route: $e');
-      }
-    }
-  }
-
-  List<LatLng> _decodePolyline(String encoded) {
-    List<LatLng> polylinePoints = [];
-    int index = 0;
-    int len = encoded.length;
-    int lat = 0;
-    int lng = 0;
-
-    while (index < len) {
-      int b;
-      int shift = 0;
-      int result = 0;
-      do {
-        b = encoded.codeUnitAt(index++) - 63;
-        result |= (b & 0x1f) << shift;
-        shift += 5;
-      } while (b >= 0x20);
-      int dlat = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
-      lat += dlat;
-
-      shift = 0;
-      result = 0;
-      do {
-        b = encoded.codeUnitAt(index++) - 63;
-        result |= (b & 0x1f) << shift;
-        shift += 5;
-      } while (b >= 0x20);
-      int dlng = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
-      lng += dlng;
-
-      final pLat = (lat / 1E5).toDouble();
-      final pLng = (lng / 1E5).toDouble();
-      polylinePoints.add(LatLng(pLat, pLng));
-    }
-    return polylinePoints;
-  }
 
   Future<void> calculate(double startLat, double startLong, double endLat, double endLong, String token) async {
     try {
@@ -215,6 +131,8 @@ class ConfirmTaxiBookViewModel extends ChangeNotifier {
         'start': startingPointController.text,
         'arrive': arrivalPointController.text,
         'cost': cost.toStringAsFixed(2),
+        'driver_name': taxi.driverName,
+        'type': taxi.type,
       });
     } else {
       Fluttertoast.showToast(

@@ -10,13 +10,14 @@ class LoginViewModel extends ChangeNotifier {
 
   Future<void> login(context) async {
     try {
-      // accessToken = await _apiService.login(phoneController.text);
-      // if (accessToken!.isNotEmpty){
+      accessToken = await _apiService.login(phoneController.text);
+      print(accessToken);
+      if (accessToken!.isNotEmpty){
         // حفظ حالة تسجيل الدخول
         await _prefsService.setLoggedIn(true);
         // التنقل إلى الشاشة الرئيسية
         Navigator.pushNamed(context, '/home');
-      // }
+      }
       notifyListeners();
     } catch (e) {
       print('Error: $e');

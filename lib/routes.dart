@@ -26,7 +26,7 @@ Map<String, WidgetBuilder> appRoutes = {
 
   AppRoute.taxi: (context) => const TaxiView(),
   AppRoute.taxiDriverDetails: (context) => const TaxiDriverDetailsView(),
-  AppRoute.confirmTaxiBook: (context) => const ConfirmTaxiBookView(),
+  AppRoute.confirmTaxiBook: (context) =>  ConfirmTaxiBookView(),
 
   AppRoute.truck: (context) => const TruckView(),
   AppRoute.truckDriverDetails: (context) => const TruckDriverDetailsView(),

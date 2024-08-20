@@ -12,7 +12,18 @@ class HomeView extends StatelessWidget {
           return Scaffold(
             body: Stack(
               children: <Widget>[
-                GoogleMaps(viewModel:viewModel),
+                // GoogleMaps(viewModel:viewModel),
+                const Padding(
+                  padding: EdgeInsets.only(top: 66),
+                  child: GoogleMap(
+                    myLocationEnabled: true,
+                    trafficEnabled: true,
+                    initialCameraPosition: CameraPosition(
+                      target: LatLng(15.371921, 44.195652), // Default location
+                      zoom: 14.4746,
+                    ),
+                  ),
+                ),
                 appBarSimple(context,"Taxi delivery address"),
                 Positioned(
                   bottom: 0,
