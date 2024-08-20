@@ -20,28 +20,7 @@ class ChooseRegistrationScreen extends StatelessWidget {
             ),
             child: ChangeNotifierProvider(
               create: (context) => OnBoardingViewModel(context.read<SharedPreferencesService>()),
-              child: Column(
-                children: [
-                  Expanded(
-                      flex: 3,
-                      child: Column(
-                        children: [
-                          const Spacer(flex: 1),
-                          const CustomRow(name: "obic ", title: "taxi", mainAxisAlignment: MainAxisAlignment.center, fontSize: 34,),
-                          const Spacer(flex: 1),
-                          const SizedBox(width:200,height:200,child: Image(image: AssetImage(AppImageAsset.map))),
-                          const Spacer(flex: 1),
-                          CustomButtonGeneral(title: 'Get Started', isRegisterButton: false, onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/login');
-                          },),
-                          CustomButtonGeneral(title: 'Registration', isRegisterButton: true, onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/login');
-                          },),
-                          const Spacer(flex: 1),
-                        ],
-                      ))
-                ],
-              ),
+              child: const ChooseRegistrationContent(),
             ),
           ),
         ),

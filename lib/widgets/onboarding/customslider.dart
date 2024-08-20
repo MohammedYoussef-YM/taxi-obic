@@ -6,11 +6,11 @@ class CustomSliderOnBoarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<OnBoardingViewModel>(
-      builder: (context, controller, child) {
+      builder: (context, viewModel, child) {
         return PageView.builder(
-          controller: controller.pageController,
+          controller: viewModel.pageController,
           onPageChanged: (val) {
-            controller.onPageChanged(context,val);
+            viewModel.onPageChanged(context,val);
           },
           itemCount: onBoardingList.length,
           itemBuilder: (context, i) => Column(
@@ -19,7 +19,7 @@ class CustomSliderOnBoarding extends StatelessWidget {
               const CustomRow(name: "obic ", title: "taxi", mainAxisAlignment: MainAxisAlignment.center, fontSize: 34,),
               SizedBox(height: MediaQuery.of(context).size.height * .22),
               InkWell(
-                onTap: (){controller.next(context);},
+                onTap: (){viewModel.next(context);},
                 child: SizedBox(
                   height: 100,
                   child: Stack(

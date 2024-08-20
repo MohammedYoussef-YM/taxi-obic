@@ -2,7 +2,7 @@ import 'package:taxi_obic/utils/import.dart';
 
 class TruckDriverDetailsViewModel extends ChangeNotifier {
   final Completer<GoogleMapController> mapController = Completer();
-  Set<Marker> truckMarkers = {};
+  Set<Marker> markers = {};
   GoogleMapController? controller;
 
 
@@ -17,7 +17,7 @@ class TruckDriverDetailsViewModel extends ChangeNotifier {
 
   void specificMarkers(BuildContext context,truck) async {
 
-    truckMarkers.clear();
+    markers.clear();
 
     // Load custom icons
     final availableIcon = await BitmapDescriptor.fromAssetImage(
@@ -30,7 +30,7 @@ class TruckDriverDetailsViewModel extends ChangeNotifier {
       'assets/images/taxi_marker_unavailable.png', // Use a different icon for unavailable taxis
     );
 
-    truckMarkers.add(
+    markers.add(
       Marker(
         markerId: MarkerId('${truck!.id}'),
         position: LatLng(truck!.latitude, truck!.longitude),

@@ -2,21 +2,14 @@ import 'package:taxi_obic/utils/import.dart';
 
 class TaxiView extends StatelessWidget {
 
-  const TaxiView({Key? key}) : super(key: key);
+  const TaxiView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          const GoogleMap(
-            myLocationEnabled: true,
-            trafficEnabled: true,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(15.371921, 44.195652), // Default location
-              zoom: 14.4746,
-            ),
-          ),
+          const ShowMap(),
           appBarSimple(context,"Back"),
           Positioned(
             bottom: 0,
@@ -27,9 +20,9 @@ class TaxiView extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.fromLTRB(70, 44, 70, 32),
                 child: Consumer<TaxiViewModel>(
-                    builder: (context,controller,child) {
+                    builder: (context,viewModel,child) {
                       return CustomButtonGeneral(title: 'Details', isRegisterButton: false, onPressed: () {
-                        controller.goToTaxiDetails(context);
+                        viewModel.goToTaxiDetails(context);
                       },);
                     }
                 ),

@@ -16,13 +16,13 @@ class DoneBookView extends StatelessWidget {
         return Scaffold(
           body: SafeArea(
             child: Consumer<DoneBookViewModel>(
-                builder: (context, controllers, child) {
+                builder: (context, viewModel, child) {
                   return SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        AppBarDoneBook(type: controllers.type),
+                        AppBarDoneBook(type: viewModel.type),
                         const Line(height: 4),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -30,9 +30,9 @@ class DoneBookView extends StatelessWidget {
                             children: [
                               const SizedBox(height: 10),
                               const Text("Starting point",style: TextStyle(color: Colors.grey),),
-                              CustomColumnForDoneBook(title: controllers.startingPoint, icon: Icons.location_on),
+                              CustomColumnForDoneBook(title: viewModel.startingPoint, icon: Icons.location_on),
                               const Text("Arriving point",style: TextStyle(color: Colors.grey),),
-                              CustomColumnForDoneBook(title: controllers.arrivalPoint, icon: Icons.flag),
+                              CustomColumnForDoneBook(title: viewModel.arrivalPoint, icon: Icons.flag),
                               const CustomColumnForDoneBook(title: "It takes 18 minutes to reach you.", icon: Icons.access_time),
                               const CustomColumnForDoneBook(title: "Please wait at the arrival point", icon: Icons.accessibility),
                               Center(child: Image.asset(AppImageAsset.taxiRound,width: MediaQuery.of(context).size.height * .34)),
@@ -42,7 +42,7 @@ class DoneBookView extends StatelessWidget {
                                   child:  ButtonBook(
                                           title: 'Done',
                                           onPressed: () {
-                                            // controllers.goToFinalDoneBook(context);
+                                            // viewModel.goToFinalDoneBook(context);
                                             print("done");
                                           }, isDone: true,
                                         )

@@ -7,7 +7,7 @@ class HomeViewModel extends ChangeNotifier {
   final Completer<GoogleMapController> mapController = Completer();
   GoogleMapController? controller;
   List<Taxi> taxis = [];
-  Set<Marker> taxiMarkers = {};
+  Set<Marker> markers = {};
 
   HomeViewModel(this._apiService, this._sharedPreferencesService);
 
@@ -48,7 +48,7 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void updateTaxiMarkers(BuildContext context) async {
-    taxiMarkers.clear();
+    markers.clear();
 
     // Load custom icons
     final availableIcon = await BitmapDescriptor.fromAssetImage(
@@ -62,7 +62,7 @@ class HomeViewModel extends ChangeNotifier {
     );
 
     for (var taxi in taxis) {
-      taxiMarkers.add(
+      markers.add(
         Marker(
           markerId: MarkerId('${taxi.id}'),
           position: LatLng(taxi.latitude, taxi.longitude),

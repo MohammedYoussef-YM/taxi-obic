@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Taxi',
-        initialRoute: isLoggedIn ? AppRoute.login : (onBoardingSeen ? AppRoute.login : AppRoute.onBoarding),
+        initialRoute: isLoggedIn ? AppRoute.home : (onBoardingSeen ? AppRoute.login : AppRoute.onBoarding),
         routes: appRoutes,
         theme: ThemeData(
           primarySwatch: Colors.blue,

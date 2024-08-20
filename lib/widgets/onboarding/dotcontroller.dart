@@ -6,7 +6,7 @@ class CustomDotControllerOnBoarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<OnBoardingViewModel>(
-      builder: (context, controller, child) {
+      builder: (context, viewModel, child) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -16,14 +16,15 @@ class CustomDotControllerOnBoarding extends StatelessWidget {
                   (index) => AnimatedContainer(
                 margin: const EdgeInsets.only(right: 5),
                 duration: const Duration(milliseconds: 900),
-                width: controller.currentPage == index ? 15 : 15,
+                width: viewModel.currentPage == index ? 15 : 15,
                 height: 15,
                 decoration: BoxDecoration(
-                  color: controller.currentPage == index ? AppColor.primaryColor : AppColor.white,
+                  color: viewModel.currentPage == index ? AppColor.primaryColor : AppColor.white,
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
             ),
+            const Spacer(),
           ],
         );
       },
