@@ -24,33 +24,7 @@ class DoneBookView extends StatelessWidget {
                       children: <Widget>[
                         AppBarDoneBook(type: viewModel.type,driverName:viewModel.driverName ,),
                         const Line(height: 4),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 10),
-                              const Text("Starting point",style: TextStyle(color: Colors.grey),),
-                              CustomColumnForDoneBook(title: viewModel.startingPoint, icon: Icons.location_on),
-                              const Text("Arriving point",style: TextStyle(color: Colors.grey),),
-                              CustomColumnForDoneBook(title: viewModel.arrivalPoint, icon: Icons.flag),
-                              const CustomColumnForDoneBook(title: "It takes 18 minutes to reach you.", icon: Icons.access_time),
-                              const CustomColumnForDoneBook(title: "Please wait at the arrival point", icon: Icons.accessibility),
-                              Center(child: Image.asset(AppImageAsset.taxiRound,width: MediaQuery.of(context).size.height * .34)),
-                              Center(
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width * .65,
-                                  child:  ButtonBook(
-                                          title: 'Done',
-                                          onPressed: () {
-                                            // viewModel.goToFinalDoneBook(context);
-                                            print("done");
-                                          }, isDone: true,
-                                        )
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        buildContentOfPage(viewModel, context),
                       ],
                     ),
                   );
@@ -59,6 +33,36 @@ class DoneBookView extends StatelessWidget {
         );
       }),
     );
+  }
+
+  Padding buildContentOfPage(DoneBookViewModel viewModel, BuildContext context) {
+    return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10),
+                            const Text("Starting point",style: TextStyle(color: Colors.grey),),
+                            CustomColumnForDoneBook(title: viewModel.startingPoint, icon: Icons.location_on),
+                            const Text("Arriving point",style: TextStyle(color: Colors.grey),),
+                            CustomColumnForDoneBook(title: viewModel.arrivalPoint, icon: Icons.flag),
+                            const CustomColumnForDoneBook(title: "It takes 18 minutes to reach you.", icon: Icons.access_time),
+                            const CustomColumnForDoneBook(title: "Please wait at the arrival point", icon: Icons.accessibility),
+                            Center(child: Image.asset(AppImageAsset.taxiRound,width: MediaQuery.of(context).size.height * .34)),
+                            Center(
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * .65,
+                                child:  ButtonBook(
+                                        title: 'Done',
+                                        onPressed: () {
+                                          // viewModel.goToFinalDoneBook(context);
+                                          print("done");
+                                        }, isDone: true,
+                                      )
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
   }
 }
 

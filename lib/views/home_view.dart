@@ -12,18 +12,7 @@ class HomeView extends StatelessWidget {
           return Scaffold(
             body: Stack(
               children: <Widget>[
-                // GoogleMaps(viewModel:viewModel),
-                const Padding(
-                  padding: EdgeInsets.only(top: 66),
-                  child: GoogleMap(
-                    myLocationEnabled: true,
-                    trafficEnabled: true,
-                    initialCameraPosition: CameraPosition(
-                      target: LatLng(15.371921, 44.195652), // Default location
-                      zoom: 14.4746,
-                    ),
-                  ),
-                ),
+                buildShowMap(),
                 appBarSimple(context,"Taxi delivery address"),
                 Positioned(
                   bottom: 0,
@@ -38,34 +27,19 @@ class HomeView extends StatelessWidget {
       ),
     );
   }
-}
 
-class GoogleMaps extends StatelessWidget {
-  final dynamic viewModel;
-
-  const GoogleMaps({
-    super.key,required this.viewModel
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 66),
-      child: GoogleMap(
-        myLocationEnabled: true,
-        trafficEnabled: true,
-        initialCameraPosition: const CameraPosition(
-          target: LatLng(15.371921, 44.195652), // Default location
-          zoom: 14.4746,
-        ),
-        onMapCreated: (GoogleMapController controller) {
-          viewModel.mapController.complete(controller);
-          viewModel.controller = controller;
-          viewModel.getCurrentLocation(context);
-        },
-        markers: viewModel.markers, // Display taxi markers
-      ),
-    );
+  Padding buildShowMap() {
+    return const Padding(
+                padding: EdgeInsets.only(top: 66),
+                child: GoogleMap(
+                  myLocationEnabled: true,
+                  trafficEnabled: true,
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(15.371921, 44.195652), // Default location
+                    zoom: 14.4746,
+                  ),
+                ),
+              );
   }
 }
 

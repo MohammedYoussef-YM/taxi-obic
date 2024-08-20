@@ -14,17 +14,7 @@ class ConfirmTaxiBookView extends StatelessWidget {
           builder: (context, viewModel, child) {
             return Stack(
               children: <Widget>[
-                // buildGoogleMap(viewModel),
-                GoogleMap(
-                  mapType: MapType.normal,
-                  initialCameraPosition: viewModel.kGooglePlex,
-                  onMapCreated: (GoogleMapController controller) {
-                    viewModel.controllerMap.complete(controller);
-                  },
-                  onCameraMove: (CameraPosition position) {
-                    viewModel.updateLocationFromMap(position);
-                  },
-                ),
+                buildGoogleMap(viewModel),
                 // Fixed marker at the center of the screen
                 const Center(
                   child: Icon(Icons.location_on, size: 40, color: Colors.red),
@@ -37,6 +27,19 @@ class ConfirmTaxiBookView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  GoogleMap buildGoogleMap(ConfirmTaxiBookViewModel viewModel) {
+    return GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: viewModel.kGooglePlex,
+                onMapCreated: (GoogleMapController controller) {
+                  viewModel.controllerMap.complete(controller);
+                },
+                onCameraMove: (CameraPosition position) {
+                  viewModel.updateLocationFromMap(position);
+                },
+              );
   }
 
   Positioned buildBottomSheet(ConfirmTaxiBookViewModel viewModel, BuildContext context) {
