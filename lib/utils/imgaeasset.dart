@@ -8,7 +8,6 @@ class AppImageAsset {
   static const String truckRectangle = "$rootImages/truck_rectangle.png";
   static const String arrow = "$rootImages/arrow.svg";
   static const String man = "$rootImages/man.png";
-  static const String taxiRound = "$rootImages/taxi_round.png";
   static const String circle = "$rootImages/circle.png";
 
   static const String loading = "$rootLottie/loading.json";
